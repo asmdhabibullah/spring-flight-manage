@@ -5,8 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-// import flight.manage.project.Runway.Runway;
-
+// Auto run dependency injection using spring configuration
 @Configuration
 public class AirportConfig {
 

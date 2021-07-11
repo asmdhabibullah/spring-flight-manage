@@ -17,10 +17,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import flight.manage.project.Runway.Runway;
 
+
+// Entity is a table of the database 
 @Entity(name = "Airport")
 @Table
 public class Airport {
 
+    // Auto genarate ID
     @Id
     @SequenceGenerator(
         name = "airport_sequence",
@@ -35,17 +38,21 @@ public class Airport {
 
     private String name;
 
+    // Relationship with runway table
     @JsonIgnore
     @OneToMany(mappedBy = "airport")
     private Set<Runway> runways = new HashSet<>();
 
+    // Empty constructore
     public Airport() {
     }
     
+    // Constructore with member variable
     public Airport(String name) {
         this.name = name;
     }
 
+    // Getter & Setter method of the local variable
     public Airport(Long id, String name) {
         this.id = id;
         this.name = name;
@@ -71,12 +78,4 @@ public class Airport {
     public Set<Runway> getRunways() {
         return this.runways;
     }
-
-    // public List<Runway> getRunways() {
-    //     return this.runways;
-    // }
-
-    // public void setRunways(List<Runway> runways) {
-    //     this.runways = runways;
-    // }
 }

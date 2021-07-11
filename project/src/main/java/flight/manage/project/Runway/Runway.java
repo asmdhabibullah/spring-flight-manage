@@ -22,10 +22,12 @@ import flight.manage.project.Airport.Airport;
 import flight.manage.project.Surface.Surface;
 
 
+// Entity is a table of the database 
 @Entity(name = "Runway")
 @Table()
 public class Runway {
     
+    // Auto genarate ID
     @Id
     @SequenceGenerator(
         name = "runway_sequence", 
@@ -41,6 +43,7 @@ public class Runway {
     private double width;
     private double length;
 
+    // Relationship with airport & surface table
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "airport_id", referencedColumnName = "id")
     private Airport airport;
@@ -49,14 +52,17 @@ public class Runway {
     @OneToMany(mappedBy = "runway")
     private Set<Surface> surface = new HashSet<>();
 
+    // Empty constructore
     public Runway() {
     }
 
+    // Constructore with member variable
     public Runway(double width, double length) {
         this.width = width;
         this.length = length;
     }
 
+    // Getter & Setter method of the local variable
     public Long getId() {
         return this.id;
     }

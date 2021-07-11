@@ -8,23 +8,25 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// Dependency injection for help the controller of airport
 @Service
 public class AirportSevice {
     
     private final AirportRepository airportRepository;
 
+    // Dependency injection
     @Autowired
     public AirportSevice(AirportRepository airportRepository) {
         this.airportRepository = airportRepository;
     }
 
-
+    // Get all airports from database airport table
     public List<Airport> getAirports() {
         return airportRepository.findAll();
     }
 
+    // Create new airport
     public void addNewAirport(Airport airport) {
-
         Optional<Airport> airOptional = airportRepository.findAirportByName(airport.getName());
         if (airOptional.isPresent()) {
             throw new IllegalStateException("Name already exist");
@@ -33,7 +35,7 @@ public class AirportSevice {
         // System.out.println(airport.getName());
         airportRepository.save(airport);
     }
-
+    // Update existing airport
     @Transactional
     public void updateAirport(Long airportId, String name) {
         Airport airport = airportRepository.findById(airportId)
@@ -45,6 +47,7 @@ public class AirportSevice {
         }
     }
 
+    // Delete existing airport use airport id
     public void deleteAirportById(Long airportId) {
         boolean exist = airportRepository.existsById(airportId);
         if (!exist) {

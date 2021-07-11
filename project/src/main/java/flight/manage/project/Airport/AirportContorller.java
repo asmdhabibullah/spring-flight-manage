@@ -13,29 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+// Handle user request for airport database table
 @RestController
 @RequestMapping(path = "api/v1/airports")
 public class AirportContorller {
 
     private final AirportSevice airportService;
 
+    // Dependency injection
     @Autowired
     public AirportContorller(AirportSevice airportService) {
         this.airportService = airportService;
     }
 
     
+    // Get all airports from database airport table
     @GetMapping
     public List<Airport> getAirports() {
         return airportService.getAirports();
     }
 
+    // Create new airport
     @PostMapping
     public void postAirport(@RequestBody Airport airport) {
         // System.out.println("It's new airport: " + airport);
         airportService.addNewAirport(airport);
     }
 
+    // Update existing airport
     @PutMapping(path = "{airportId}")
     public void updateAirportById(
         @PathVariable("airportId") Long airportId,
@@ -44,6 +49,7 @@ public class AirportContorller {
         airportService.updateAirport(airportId, name);
     }
 
+    // Delete existing airport use airport id
     @DeleteMapping(path = "{airportId}")
     public void deleteAirport(@PathVariable("airportId") Long airportId) {
         airportService.deleteAirportById(airportId);

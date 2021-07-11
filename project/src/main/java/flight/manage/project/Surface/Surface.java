@@ -11,11 +11,12 @@ import javax.persistence.Table;
 
 import flight.manage.project.Runway.Runway;
 
-
+// Entity is a table of the database 
 @Entity(name = "Surface")
 @Table()
 public class Surface {
-    
+
+    // Auto genarate ID
     @Id
     @SequenceGenerator(
         name = "surface_sequence", 
@@ -31,19 +32,23 @@ public class Surface {
     private String type;
     private String condition;
 
+    // Relationship with runway table
     @ManyToOne
     @JoinColumn(name = "runway_id", referencedColumnName = "id")
     private Runway runway;
 
+    // Empty constructore
     public Surface() {
     }
 
-    public Surface(Long id, String type, String condition) {
+    // Constructore with member variable
+    public Surface(String type, String condition) {
         this.type = type;
         this.condition = condition;
     }
 
 
+    // Getter & Setter method of the local variable
     public Long getId() {
         return this.id;
     }
